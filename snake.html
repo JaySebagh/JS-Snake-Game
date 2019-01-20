@@ -1,7 +1,9 @@
+<head></head>
+<body>
 <canvas id="gc" width="400" height="400"></canvas>
 <script>
 window.onload = function() {
-    canv = document.getElementbyID("gc");
+    canv = document.getElementById("gc");
     ctx = canv.getContext("2d");
     document.addEventListener("keydown", keyPush);
     setInterval(game, 1000/15);
@@ -47,6 +49,17 @@ function game() {
         }
     }
 
+    trail.push({x:px, y:py});
+    while(trail.length > tail) {
+        trail.shift();
+    }
+
+    if(ax == px && ay == py) {
+        tail++;
+        ax = Math.floor(Math.random()*tc);
+        ay = Math.floor(Math.random()*tc);
+    }
+
     ctx.fillStyle = "red";
     ctx.fillRect(ax * gs, ay * gs, gs-2, gs-2);
 
@@ -69,3 +82,4 @@ function keyPush(evt) {
     }
 }
 </script>
+</body>
